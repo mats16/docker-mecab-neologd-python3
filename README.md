@@ -1,0 +1,1 @@
+# docker-mecab-neologd-python3
