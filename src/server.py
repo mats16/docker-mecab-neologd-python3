@@ -3,7 +3,7 @@
 from flask import Flask, request, jsonify
 import MeCab
 
-tokenizer = MeCab.Tagger('-Ochasen -r ./mecabrc')
+tokenizer = MeCab.Tagger('-Ochasen')
 tokenizer.parse('')
 
 app = application = Flask(__name__)
