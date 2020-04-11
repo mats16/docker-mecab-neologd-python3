@@ -34,4 +34,4 @@ COPY src/ ./
 
 ENV LANG C.UTF-8
 EXPOSE 9090
-CMD ["uwsgi", "--http", ":9090", "--thunder-lock", "--enable-threads", "--threads", "2", "--wsgi-file", "server.py"]
+CMD ["uwsgi", "--http", ":9090",  "--wsgi-file", "server.py", "--thunder-lock", "--enable-threads", "--threads", "2", "--http-keepalive", "--http-auto-gzip"]
