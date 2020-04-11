@@ -18,7 +18,6 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder /usr/lib/x86_64-linux-gnu/mecab/dic/mecab-ipadic-neologd/ /var/lib/mecab/dic/ipadic-neologd/
-#COPY mecabrc /etc/mecabrc
 
 ARG UID=1000
 ARG USERNAME=mecab
@@ -34,4 +33,4 @@ COPY src/ ./
 
 ENV LANG C.UTF-8
 EXPOSE 9090
-CMD ["uwsgi", "--http", ":9090",  "--wsgi-file", "server.py", "--thunder-lock", "--enable-threads", "--threads", "2", "--http-keepalive", "--http-auto-gzip"]
+CMD ["uwsgi", "--http", ":9090",  "--wsgi-file", "server.py", "--thunder-lock", "--enable-threads", "--threads", "2", "--http-auto-gzip", "--http-keepalive", "--http-timeout", "120", "--add-header", "Connection:Keep-Alive"]
