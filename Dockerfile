@@ -19,15 +19,14 @@ RUN apt-get update && \
 
 COPY --from=builder /usr/lib/x86_64-linux-gnu/mecab/dic/mecab-ipadic-neologd/ /var/lib/mecab/dic/ipadic-neologd/
 
+COPY src/requirements.txt ./requirements.txt
+RUN pip install -r requirements.txt
+
 ARG UID=1000
 ARG USERNAME=mecab
 RUN useradd -m -u ${UID} ${USERNAME}
-WORKDIR /home/${USERNAME}
-
-COPY requirements.txt ./requirements.txt
-RUN pip install -r requirements.txt
-
 USER ${USERNAME}
+WORKDIR /home/${USERNAME}
 
 COPY src/ ./
 
